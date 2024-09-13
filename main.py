@@ -12,7 +12,7 @@ option = st.selectbox("Select data to view",
 if place:
     try:
         # Get the temperature/sky data
-        data, dates = get_data(place, days, option)
+        data, dates, conditions = get_data(place, days, option)
     except KeyError:
         st.error("Invalid city name or data not available.")
     else:
@@ -27,4 +27,6 @@ if place:
             images = {"Clear": "images/clear.png", "Clouds" : "images/cloud.png",
                     "Rain": "images/rain.png", "Snow": "images/snow.png"}
             image_paths = [images[condition] for condition in data]
-            st.image(image_paths, width=115, caption=dates)
+            # caption = [conditions[i] + ' | ' + dates[i] for i in range(len(dates))]
+            caption = [f"Condition: {conditions[i]} \n Date: {dates[i]}" for i in range(len(dates))]
+            st.image(image_paths, width=140, caption=caption)

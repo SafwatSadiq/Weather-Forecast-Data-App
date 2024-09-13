@@ -11,6 +11,7 @@ def get_data(place, forecast_days, kind):
     data = response.json()
     filtered_datas = []
     dates = []
+    conditions = []
     for i in range(forecast_days * 8):
         if kind == 'Temperature':
             filtered_data = round(data['list'][i]['main']['temp'] - 273, 2)
@@ -19,7 +20,9 @@ def get_data(place, forecast_days, kind):
         filtered_datas.append(filtered_data)
         date = data['list'][i]['dt_txt']
         dates.append(date)
-    return filtered_datas, dates
+        condition = data['list'][i]['weather'][0]['description']
+        conditions.append(condition)
+    return filtered_datas, dates, conditions
 
 if __name__ == '__main__':
     print(get_data('dhaka', 5, 'Sky'))
