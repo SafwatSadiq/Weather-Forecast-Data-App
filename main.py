@@ -27,7 +27,7 @@ if place:
             images = {"Clear": "images/clear.png", "Clouds" : "images/cloud.png",
                     "Rain": "images/rain.png", "Snow": "images/snow.png"}
             image_paths = [images[condition] for condition in data]
-            caption = [conditions[i] + ' | ' +
+            caption = [conditions[i].capitalize() + ' | ' +
                        dates[i].split(" ")[0] + ' | ' +
                        dates[i].split(" ")[1] for i in range(len(dates))]
             st.image(image_paths, width=140, caption=caption)
